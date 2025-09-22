@@ -1,8 +1,5 @@
 # File-Data-Extractor-Python-2.7.18-
 Grab keywords to extract key information from files. Compatible with new versions of Python 3 and Python 2.7.18
-
-# Data Extractor
-
 This tool extracts data based on user-defined keywords (e.g., `Chapter`, `Element (VAL, ANGLE...)`) and saves the results as separate `.csv` files, each with its own filename for easy access.
 
 ## Prerequisites
