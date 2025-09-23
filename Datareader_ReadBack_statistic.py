@@ -144,7 +144,7 @@ def calculate_statistics(section_datasets):
 
     for dataset in section_datasets:
         # 收集数据
-        ch0_4_vals = []
+        ch0_3_vals = []
         ch5_11_vals = []  # 除了ch8
         ch0_11_vals = []
         ch0_11_angles = []
@@ -155,8 +155,8 @@ def calculate_statistics(section_datasets):
             ch_data = dataset[ch_label]
 
             # Val数据
-            if 0 <= ch_num <= 4:
-                ch0_4_vals.append(ch_data['VAL'])
+            if 0 <= ch_num <= 3:
+                ch0_3_vals.append(ch_data['VAL'])
             elif 5 <= ch_num <= 11 and ch_num != 8:
                 ch5_11_vals.append(ch_data['VAL'])
 
@@ -169,12 +169,12 @@ def calculate_statistics(section_datasets):
         stats = {}
 
         # Val统计
-        if ch0_4_vals:
-            stats['VAL_ch0_4_avg'] = sum(ch0_4_vals) / len(ch0_4_vals)
-            stats['VAL_ch0_4_max'] = max(ch0_4_vals)
-            stats['VAL_ch0_4_min'] = min(ch0_4_vals)
+        if ch0_3_vals:
+            stats['VAL_ch0_3_avg'] = sum(ch0_3_vals) / len(ch0_3_vals)
+            stats['VAL_ch0_3_max'] = max(ch0_3_vals)
+            stats['VAL_ch0_3_min'] = min(ch0_3_vals)
         else:
-            stats['VAL_ch0_4_avg'] = stats['VAL_ch0_4_max'] = stats['VAL_ch0_4_min'] = ''
+            stats['VAL_ch0_3_avg'] = stats['VAL_ch0_3_max'] = stats['VAL_ch0_3_min'] = ''
 
         if ch5_11_vals:
             stats['VAL_ch5_11_avg'] = sum(ch5_11_vals) / len(ch5_11_vals)
@@ -224,7 +224,7 @@ def write_sheet_to_excel(sheet, section_info, start_row=1):
     # 定义列名和对应的列索引
     headers = ['Source_File', 'Section', 'CH_Label', 'VAL', 'ANGLE', 'DG', 'OANG']
     stat_headers = [
-        'Stat_Type', 'VAL_ch0_4_Avg', 'VAL_ch0_4_Max', 'VAL_ch0_4_Min',
+        'Stat_Type', 'VAL_ch0_3_Avg', 'VAL_ch0_3_Max', 'VAL_ch0_3_Min',
         'VAL_ch5_11_Avg', 'VAL_ch5_11_Max', 'VAL_ch5_11_Min',
         'VAL_All_Avg', 'VAL_All_Max', 'VAL_All_Min',
         'ANGLE_All_Avg', 'ANGLE_All_Max', 'ANGLE_All_Min',
@@ -272,9 +272,9 @@ def write_sheet_to_excel(sheet, section_info, start_row=1):
     for stats in statistics_data:
         stat_row_data = [
             'Statistics',
-            stats.get('VAL_ch0_4_avg', ''),
-            stats.get('VAL_ch0_4_max', ''),
-            stats.get('VAL_ch0_4_min', ''),
+            stats.get('VAL_ch0_3_avg', ''),
+            stats.get('VAL_ch0_3_max', ''),
+            stats.get('VAL_ch0_3_min', ''),
             stats.get('VAL_ch5_11_avg', ''),
             stats.get('VAL_ch5_11_max', ''),
             stats.get('VAL_ch5_11_min', ''),
@@ -412,7 +412,7 @@ def main():
             processed_files_count += 1
 
         # 生成合并的输出 Excel 文件名 (在指定文件夹内)
-        output_file = os.path.join(folder_path, 'ALL_VAL_ANGLE_By_Section_statistic.xlsx')
+        output_file = os.path.join(folder_path, 'ALL_VAL_ANGLE_By_Section.xlsx')
 
         # 保存 Excel 文件
         try:
